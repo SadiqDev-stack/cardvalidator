@@ -1,0 +1,16 @@
+{
+   "compilerOptions": {
+    "rootDir": "./server",
+    "outDir": "./dist",
+
+    "module": "NodeNext",
+    "target": "ES2020",
+
+    "types": ["node"],
+
+    "strict": true,
+    "esModuleInterop": true,
+
+    "skipLibCheck": true
+  }
+}
