@@ -113,7 +113,7 @@ It works by:
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-link>
+git clone <https://github.com/sadiqDev-stack/cardvalidator>
 cd card-validator
 ```
 
@@ -123,16 +123,15 @@ cd card-validator
 npm install
 ```
 
-### 3. Run in development mode
+### 3. navigate to server directory
 
 ```bash
-npm run dev
+cd server
 ```
 
-### 4. Build and run production
+### 4. Build and run app
 
 ```bash
-npm run build
 npm start
 ```
 
@@ -143,9 +142,9 @@ npm start
 ```text
 server/
  ├── controllers/
- ├── routes/
+ ├── routers/
  ├── services/
- ├── utils/
+ ├── utilities/
  ├── app.ts
  └── server.ts
 ```
