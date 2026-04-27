@@ -1,96 +1,176 @@
-# card validator api 
+# Card Validator API
 
-this is a sinple api that i created which it core function is to mainly validate card number using the luhn algorithm 
+A simple REST API built with **Express.js and TypeScript** that validates card numbers using the **Luhn Algorithm**.
 
-it provide and endpoint that you send a post request which validate the card number and give you accurate response 
+---
 
-# how to use the api and validate card
+## Overview
 
-send a POST request to /api/card/validate with the json body data 
+This API provides a single endpoint to validate whether a card number is valid or not.
+
+It ensures:
+
+* Proper input validation
+* Clear response structure
+* Standard HTTP status codes
+* Error handling for invalid or missing input
+
+---
+
+## Endpoint
+
+### POST `/api/card/validate`
+
+Validate a card number.
+
+### Request Body
+
+```json
 {
-    cardNumber: "string of the card digit"
+  "cardNumber": "4532015112830366"
 }
+```
 
-here are the response you will expect and the status code 
-notice that the api is a standard one so you already know what are the field containing details
+---
 
-success: boolean, this means the server doesnt encounter an error while processing 
-validated: boolean, this means that it has passed through the validation phase 
-isValid: a boolean representing whether the card is valid or not it is nested inside the data object 
-data: {
-    isValid: true
-}
+## Response Format
 
+### Success (Valid or Invalid Card)
 
-if successfully processed 
+**Status: 200**
 
-status 200
-
+```json
 {
-    success: true,
-    message: "Card number is valid",
-    validated: true,
-    data: {
-      isValid: false
-    }
+  "success": true,
+  "message": "Card number is valid",
+  "data": {
+    "isValid": true
+  }
 }
+```
 
+or
 
-if we dont provide valid cardNumber field on request 
-
-status 400
-
+```json
 {
-    success: true,
-    message: "Please provide a valid card number",
-    validated: false,
-    data: {
-      isValid: false
-    }
+  "success": true,
+  "message": "Card number is not valid",
+  "data": {
+    "isValid": false
+  }
 }
+```
 
-if something went wrong on the server while processing 
+---
 
+### Bad Request (Missing or Invalid Input)
 
-status 500
+**Status: 400**
 
+```json
 {
-    success: false,
-    message: "Internal server error",
-    validated: false,
-    data: {
-      isValid: false
-    }
+  "success": false,
+  "message": "Please provide a valid card number",
+  "data": {
+    "isValid": false
+  }
 }
+```
 
+---
 
-# how to setup the sever
-this server uses the modern express js framework for javascript together with typescript 
+### Server Error
 
-to set this server up you need to follow this steps
+**Status: 500**
 
-- installing modules 
- run this on terminal 
-  npm i -D typescript ts-node-dev @typescipt/express @typescript/node express colors
+```json
+{
+  "success": false,
+  "message": "Internal server error",
+  "data": {
+    "isValid": false
+  }
+}
+```
 
-- understand the file structure for ease usage and running code 
-server 
-  controllers - cardController.ts
-  routers - cardValidator.ts
-  utilities - cardValidator.ts
-  middlewares - error.ts logger.ts
-  server.ts
-.env
-package.json
-.gitgnore 
-README.md
-tsconfig.json
-vercel.json
-dist
+---
 
-after that adjust your env to your desired need, make sure to install all modules using npm install,
-then finally navigate to the server directory and start it 
-cd server
+## Validation Logic
+
+This API uses the **Luhn Algorithm**, which is the industry standard for validating card numbers.
+
+It works by:
+
+* Doubling every second digit from the right
+* Subtracting 9 if the result is greater than 9
+* Summing all digits
+* Checking if the total is divisible by 10
+
+---
+
+## Setup and Installation
+
+### 1. Clone the repository
+
+```bash
+git clone <your-repo-link>
+cd card-validator
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run in development mode
+
+```bash
+npm run dev
+```
+
+### 4. Build and run production
+
+```bash
+npm run build
 npm start
-this will build your dist and start the server 
+```
 
+---
+
+## Project Structure
+
+```text
+server/
+ ├── controllers/
+ ├── routes/
+ ├── services/
+ ├── utils/
+ ├── app.ts
+ └── server.ts
+```
+
+---
+
+## Testing
+
+You can test the endpoint using:
+
+* Postman
+* Thunder Client
+* curl
+
+---
+
+## Notes
+
+* Built with TypeScript (`strict: true`)
+* Follows clean architecture (controller → service → utils)
+* Designed for readability and maintainability
+
+---
+
+## Author
+
+Sadiq Abubakar
+GitHub: https://github.com/SadiqDev-stack
