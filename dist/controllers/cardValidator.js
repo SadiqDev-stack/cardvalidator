@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cardValidatorHandler = void 0;
-const node_console_1 = require("node:console");
+const logger_js_1 = require("../middlewares/logger.js");
 const cardValidator_js_1 = require("../utilities/cardValidator.js");
 const cardValidatorHandler = (req, res) => {
     try {
@@ -37,7 +37,7 @@ const cardValidatorHandler = (req, res) => {
         }
     }
     catch (error) {
-        (0, node_console_1.log)(`Error validating card number: ${error.message}`, "bad");
+        (0, logger_js_1.log)(`Error validating card number: ${error.message}`, "bad");
         return res.status(500).json({
             success: false,
             message: "Internal server error",

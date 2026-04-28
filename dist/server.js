@@ -11,6 +11,10 @@ const app = (0, express_1.default)();
 const { PORT = 8080 } = process.env;
 app.use(express_1.default.json());
 app.use(logger_js_1.logger);
+// Health check endpoint
+app.get("/", (req, res) => {
+    res.status(200).json({ message: "Card Validator API is running" });
+});
 // for routers 
 app.use("/api/card", cardValidator_js_1.default);
 // Error handling middleware (must be last)
