@@ -6,13 +6,12 @@
     "ignoreDeprecations": "6.0",
     "rootDir": "./server",
     "outDir": "./dist",
-
     "strict": true,
     "esModuleInterop": true,
-
     "skipLibCheck": true,
     "types": ["node", "jest"],
-
     "isolatedModules": true
-  }
+  },
+  "include": ["server/**/*"],
+  "exclude": ["node_modules", "dist", "tests"]
 }
