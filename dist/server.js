@@ -19,6 +19,12 @@ app.get("/", (req, res) => {
 app.use("/api/card", cardValidator_js_1.default);
 // Error handling middleware (must be last)
 app.use(error_js_1.default);
+app.use((err, req, res, next) => {
+    return res.status(404).json({
+        success: false,
+        message: "route is not found on server"
+    });
+});
 app.listen(PORT, () => {
     (0, logger_js_1.log)(`Server is running on port ${PORT}`);
 });
